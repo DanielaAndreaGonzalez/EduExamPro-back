@@ -1,6 +1,5 @@
 package com.eduexampro.EduExamProback.entidades;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -9,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -21,7 +21,8 @@ import lombok.Setter;
 @Setter
 public class PresentacionExamen {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "presentacionExamen_generator")
+    @SequenceGenerator(name = "presentacionExamen_generator", sequenceName = "presentacion_examen_seq", allocationSize = 1)
     private Long idPresentacion;
 
     @ManyToOne
@@ -38,5 +39,5 @@ public class PresentacionExamen {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraFin;
 
-    private BigDecimal calificacion;
+    private Double calificacion;
 }
